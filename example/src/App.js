@@ -4,7 +4,10 @@ import { FacebookSignIn, GoogleSignIn } from "google-facebook-signin-react";
 
 export default class App extends Component {
   success(res) {
-    console.log(res);
+    return new Promise((resolve, reject) => {
+      console.log(res);
+      resolve();
+    });
   }
 
   error(err) {

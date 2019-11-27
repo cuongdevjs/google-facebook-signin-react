@@ -27,7 +27,10 @@ import { FacebookSignIn, GoogleSignIn } from "google-facebook-signin-react";
 
 export default class App extends Component {
   success(res) {
-    console.log(res);
+    return new Promise((resolve, reject) => {
+      console.log(res);
+      resolve();
+    });
   }
 
   error(err) {
@@ -37,16 +40,27 @@ export default class App extends Component {
   render() {
     return (
       <div>
-        <FacebookSignIn onReject={this.error} onResolve={this.success}>
+        <FacebookSignIn
+          appId={"YOUR_APP_ID"}
+          onReject={this.error}
+          onResolve={this.success}
+        >
           Facebook
         </FacebookSignIn>
-        <GoogleSignIn onReject={this.error} onResolve={this.success}>
+        <GoogleSignIn
+          client_id={
+            "YOUR_CLIENT_ID"
+          }
+          onReject={this.error}
+          onResolve={this.success}
+        >
           Google
         </GoogleSignIn>
       </div>
     );
   }
 }
+
 
 ```
 
@@ -66,7 +80,7 @@ export default class App extends Component {
 ### Google Button
 | Prop                  | Type                                | Default | Description |
 | :---------            | :-------:                           | :-----: | :----------- |
-| onResolve             | `function (required)`                     | `-`       | Response when logged |
+| onResolve             | `promise function (required)`                     | `-`       | Response when logged |
 | onReject             | `function (required)`                     | `-`       | Return rrror |
 | client_id    | `string (require)`      | `-`       | id application |
 | className             | `string (optional)`                     | `-`       | class for button |
@@ -89,7 +103,7 @@ export default class App extends Component {
 ### Facebook Button
 | Prop                  | Type                                | Default | Description |
 | :---------            | :-------:                           | :-----: | :----------- |
-| onResolve             | `function (required)`                     | `-`       | Response when logged |
+| onResolve             | `promise function (required)`                     | `-`       | Response when logged |
 | onReject             | `function (required)`                     | `-`       | Return rrror |
 | appId    | `string (require)`      | `-`       | id application |
 | className             | `string (optional)`                     | `-`       | class for button |
