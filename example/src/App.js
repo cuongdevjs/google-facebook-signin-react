@@ -14,10 +14,20 @@ export default class App extends Component {
   render() {
     return (
       <div>
-        <FacebookSignIn onReject={this.error} onResolve={this.success}>
+        <FacebookSignIn
+          appId={"435414524043735"}
+          onReject={this.error}
+          onResolve={this.success}
+        >
           Facebook
         </FacebookSignIn>
-        <GoogleSignIn onReject={this.error} onResolve={this.success}>
+        <GoogleSignIn
+          client_id={
+            "142305466831-7jpko2cor6icnbrofditv4kse3s6s136.apps.googleusercontent.com"
+          }
+          onReject={this.error}
+          onResolve={this.success}
+        >
           Google
         </GoogleSignIn>
       </div>
