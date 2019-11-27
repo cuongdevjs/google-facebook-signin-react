@@ -36,11 +36,11 @@ class GoogleSSO extends React.PureComponent<any, any> {
     onResolve: PropTypes.func,
     onReject: PropTypes.func,
     isDisabled: PropTypes.bool,
-    className: PropTypes.string
+    className: PropTypes.string,
   };
 
   static defaultProps = {
-    client_id: process.env.REACT_APP_GOOGLE_LOGIN_KEY,
+    client_id: "142305466831-gol9khuhp2ufjh15cktevde0m8hd6vlp.apps.googleusercontent.com",
     cookie_policy: "single_host_origin",
     scope: "email profile",
     fetch_basic_profile: true,
@@ -87,7 +87,7 @@ class GoogleSSO extends React.PureComponent<any, any> {
                 });
               });
             } else {
-              console.log("not exist an instance: ", gapiAuth);
+              this.props.onReject("not exist an instance");
             }
           });
         }
@@ -122,7 +122,6 @@ class GoogleSSO extends React.PureComponent<any, any> {
     // const auth2 = this._window.gapi.auth2.getAuthInstance();
     // var user = auth2.currentUser.get();
     // var auth = user.getAuthResponse();
-    console.log("login success: ", res);
     this.props.onResolve({ provider: "google", data: res }).then(() => {
       this.setState({
         isProgressing: false
@@ -131,7 +130,6 @@ class GoogleSSO extends React.PureComponent<any, any> {
   }
 
   handleError(err: objectType | string) {
-    console.log("login failed: ", err);
     this.setState({
       isProgressing: false
     });

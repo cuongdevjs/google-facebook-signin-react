@@ -16,6 +16,7 @@ class FacebookSSO extends React.PureComponent<any, any> {
 
   private SDK_URL: string = "https://connect.facebook.net/vi_VI/sdk.js";
   private SCRIPT_ID: string = "facebook-jssdk";
+
   static propTypes = {
     scope: PropTypes.string,
     redirect_uri: PropTypes.string,
@@ -47,7 +48,7 @@ class FacebookSSO extends React.PureComponent<any, any> {
     profile_selector_id: true,
     language: "vi_VN",
     fieldsProfile: "name, email, birthday",
-    appId: process.env.REACT_APP_FACEBOOK_APP_KEY,
+    appId: "2086263614924092",
     xfbml: true,
     version: "v5.0",
     cookie: true,
@@ -127,14 +128,12 @@ class FacebookSSO extends React.PureComponent<any, any> {
 
   handleResponse(response: objectType) {
     if (response.authResponse) {
-      console.log("login success: ", response);
       this.getMe(response.authResponse);
     } else {
       this.setState({
         isProgressing: false
       });
       this.props.onReject(response);
-      console.log("login failure: ", response);
     }
   }
 
@@ -147,7 +146,6 @@ class FacebookSSO extends React.PureComponent<any, any> {
     // only case mobile (redirect to fb)
     // window.location.href = `https://www.facebook.com/dialog/oauth${getParamsFromObject(params)}`;
     if (!_window.FB) {
-      console.log("Fb API not loaded!");
       this.setState({
         isProgressing: false
       });
