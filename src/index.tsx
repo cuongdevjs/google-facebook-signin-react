@@ -4,20 +4,23 @@
 
 import * as React from 'react'
 
-import styles from './styles.css'
+import './styles.css'
+import FacebookSSO from "./facebookSSO";
+import GoogleSSO from "./googleSSO";
 
 export type Props = { text: string }
 
 export default class ExampleComponent extends React.Component<Props> {
   render() {
-    const {
-      text
-    } = this.props
-
     return (
-      <div className={styles.test}>
-        Example Component: {text}
-      </div>
+      <React.Fragment>
+        <FacebookSSO>
+          Login Facebook
+        </FacebookSSO>
+        <GoogleSSO>
+          Login Google
+        </GoogleSSO>
+      </React.Fragment>
     )
   }
 }
