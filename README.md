@@ -2,13 +2,21 @@
 
 > Google &amp; Facebook SignIn Button React.js
 
-[![NPM](https://img.shields.io/npm/v/google-facebook-signin-react.svg)](https://www.npmjs.com/package/google-facebook-signin-react) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+[![npm version](https://badge.fury.io/js/google-facebook-signin-react.svg)](https://badge.fury.io/js/google-facebook-signin-react) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
 ## Install
 
-```bash
+```
 npm install --save google-facebook-signin-react
 ```
+
+#### [Link Demo](https://codesandbox.io/s/google-facebook-signin-sso-reactjs-fum4f)
+
+
+
+#### [NPM](https://www.npmjs.com/package/google-facebook-signin-react)
+#### [Github](https://github.com/CuongStf/google-facebook-signin-react)
+
 
 ## Usage
 
@@ -42,6 +50,65 @@ export default class App extends Component {
 
 ```
 
-## License
+  hosted_domain: string,
+  openid_realm: string,
+  ux_mode: string,
+  redirect_uri: string,
+  prompt: string,
+  response_type: string
+  login_hint: string,
+  discoveryDocs: string,
+  access_type: string,
+  isDisabled: boolean
+}
 
+## Prop
+### Google Button
+| Prop                  | Type                                | Default | Description |
+| :---------            | :-------:                           | :-----: | :----------- |
+| onResolve             | `function (required)`                     | `-`       | Response when logged |
+| onReject             | `function (required)`                     | `-`       | Return rrror |
+| client_id    | `string (require)`      | `-`       | id application |
+| className             | `string (optional)`                     | `-`       | class for button |
+| cookie_policy           | `string (optional)`                            | `single_host_origin`    |  |
+| scope             | `string (optional)`                     | `email profile`       |  |
+| fetch_basic_profile             | `boolean (optional)`                     | `true`       | get profile information |
+| hosted_domain             | `string (optional)`                     |`-`       |  |
+| openid_realm             | `string (optional)`                     | `-`       |  |
+| ux_mode    | `string (optional)`      | `popup`       | Text display when start touch |
+| redirect_uri           | `string (optional)`                            | `/`    | only mobile |
+| prompt             | `string (optional)`                     | `select_account`       | "consent", "select_account", "none" |
+| response_type             | `string (optional)`                     | `permission`       | "id_token", "permission", "code" |
+| login_hint             | `string (optional)`                     | `true`       | |
+| discoveryDocs             | `string (optional)`                     | `https://www.googleapis.com/discovery/v1/apis/drive/v3/rest`       | request permision |
+| access_type             | `string (optional)`                     | `online`       | "online , "offline|
+| isDisabled             | `boolean (optional)`                     | `true`       | |
+
+`--------------------------------------------------------------------------------------------------------------------------`
+
+### Facebook Button
+| Prop                  | Type                                | Default | Description |
+| :---------            | :-------:                           | :-----: | :----------- |
+| onResolve             | `function (required)`                     | `-`       | Response when logged |
+| onReject             | `function (required)`                     | `-`       | Return rrror |
+| appId    | `string (require)`      | `-`       | id application |
+| className             | `string (optional)`                     | `-`       | class for button |
+| scope             | `string (optional)`                     | `"email, public_profile"`       | separate by comma symbol |
+| redirect_uri           | `string (optional)`                            | `/`    | only mobile |
+| state           | `string (optional)`                            | `facebookdirect`    |  |
+| response_type             | `string (optional)`                     | `code`       |  |
+| auth_type             | `string (optional)`                     | `-`       |  |
+| return_scopes             | `boolean (optional)`                     | `true`       | return list scope in response |
+| enable_profile_selector             | `boolean (optional)`                     | `true`       |  |
+| profile_selector_id    | `boolean (optional)`      | `true`       |  |
+| language             | `string (optional)`                     | `vi_VN`       |  |
+| isDisabled             | `boolean (optional)`                     | `true`       | |
+| fieldsProfile             | `string (optional)`                     | `name, email, birthday`       | info field profile in response |
+| xfbml             | `boolean (optional)`                     | `true`        | enabled embedded iframe xml facebook |
+| version             | `string (optional)`                     | `v5.0`        |  |
+| cookie             | `boolean (optional)`                     | `true`        | enabled cookie send facebook |
+
+
+
+## License
 MIT © [CuongStf](https://github.com/CuongStf)
