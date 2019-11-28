@@ -1,9 +1,33 @@
 import * as React from 'react'
-import * as PropTypes from "prop-types";
 import { objectType } from "./types";
 
-class GoogleSSO extends React.PureComponent<any, any> {
-  constructor(props: any) {
+interface IProps {
+  client_id: string,
+  onResolve: Function,
+  onReject: Function,
+  cookie_policy?: string,
+  scope?: string,
+  fetch_basic_profile?: boolean,
+  hosted_domain?: string,
+  openid_realm?: string,
+  ux_mode?: string,
+  redirect_uri?: string,
+  prompt?: string,
+  response_type?: string,
+  login_hint?: string,
+  discoveryDocs?: string,
+  access_type?: string,
+  isDisabled?: boolean,
+  className?: string,
+}
+
+interface IStates {
+  isSdkLoaded: boolean,
+  isProgressing: boolean
+}
+
+class GoogleSSO extends React.PureComponent<IProps, IStates> {
+  constructor(props: IProps) {
     super(props);
     this.state = {
       isSdkLoaded: false,
@@ -18,26 +42,6 @@ class GoogleSSO extends React.PureComponent<any, any> {
   private SCRIPT_ID = "google-login";
   private SCOPE = "https://www.googleapis.com/auth/drive.file";
   private _window = window as any;
-
-  static propTypes = {
-    client_id: PropTypes.string,
-    cookie_policy: PropTypes.oneOf(["", "single_host_origin"]),
-    scope: PropTypes.string,
-    fetch_basic_profile: PropTypes.bool,
-    hosted_domain: PropTypes.string,
-    openid_realm: PropTypes.string,
-    ux_mode: PropTypes.string,
-    redirect_uri: PropTypes.string,
-    prompt: PropTypes.oneOf(["consent", "select_account", "none", ""]),
-    response_type: PropTypes.oneOf(["id_token", "permission", "code", ""]),
-    login_hint: PropTypes.string,
-    discoveryDocs: PropTypes.string,
-    access_type: PropTypes.string,
-    onResolve: PropTypes.func,
-    onReject: PropTypes.func,
-    isDisabled: PropTypes.bool,
-    className: PropTypes.string,
-  };
 
   static defaultProps = {
     client_id: "142305466831-gol9khuhp2ufjh15cktevde0m8hd6vlp.apps.googleusercontent.com",

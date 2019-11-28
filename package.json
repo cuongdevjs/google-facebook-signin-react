@@ -1,7 +1,7 @@
 {
   "name": "google-facebook-signin-react",
-  "version": "1.0.1",
-  "description": "Google &amp; Facebook SignIn Button React.js",
+  "version": "1.0.4",
+  "description": "Social Single SignOn React.JS: (Google & Facebook) ",
   "author": "CuongStf",
   "license": "MIT",
   "repository": "https://github.com/CuongStf/google-facebook-signin-react",
@@ -51,5 +51,6 @@
   },
   "files": [
     "dist"
-  ]
+  ],
+  "keywords": ["react.js", "sso", "login", "social single sign on", "google-login", "facebook-login"]
 }

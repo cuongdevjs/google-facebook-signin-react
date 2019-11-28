@@ -1,9 +1,34 @@
 import * as React from 'react'
 import { objectType } from "./types";
-import * as PropTypes from "prop-types";
 
-class FacebookSSO extends React.PureComponent<any, any> {
-  constructor(props: any) {
+interface IProps {
+  appId: string,
+  onResolve: Function,
+  onReject: Function,
+  scope?: string,
+  redirect_uri?: string,
+  state?: string,
+  auth_type?: string,
+  response_type?: string,
+  return_scopes?: boolean,
+  enable_profile_selector?: boolean,
+  profile_selector_id?: boolean,
+  language?: string,
+  isDisabled?: boolean,
+  fieldsProfile?: string,
+  xfbml?: boolean,
+  version?: string,
+  cookie?: boolean,
+  className?: string
+}
+
+interface IStates {
+  isSdkLoaded: boolean,
+  isProgressing: boolean
+}
+
+class FacebookSSO extends React.PureComponent<IProps, IStates> {
+  constructor(props: IProps) {
     super(props);
     this.state = {
       isSdkLoaded: false,
@@ -12,31 +37,13 @@ class FacebookSSO extends React.PureComponent<any, any> {
     this.loginFB = this.loginFB.bind(this);
     this.getMe = this.getMe.bind(this);
     this.handleResponse = this.handleResponse.bind(this);
+    this.initFbSDK = this.initFbSDK.bind(this);
   }
 
   private SDK_URL: string = "https://connect.facebook.net/vi_VI/sdk.js";
   private SCRIPT_ID: string = "facebook-jssdk";
+  private _window = window as any;
 
-  static propTypes = {
-    scope: PropTypes.string,
-    redirect_uri: PropTypes.string,
-    state: PropTypes.string,
-    response_type: PropTypes.string,
-    auth_type: PropTypes.string,
-    return_scopes: PropTypes.bool,
-    enable_profile_selector: PropTypes.bool,
-    profile_selector_id: PropTypes.bool,
-    language: PropTypes.string,
-    appId: PropTypes.string,
-    isDisabled: PropTypes.bool,
-    fieldsProfile: PropTypes.string,
-    xfbml: PropTypes.bool,
-    version: PropTypes.string,
-    cookie: PropTypes.bool,
-    onResolve: PropTypes.func,
-    onReject: PropTypes.func,
-    className: PropTypes.string
-  };
   static defaultProps = {
     scope: "email, public_profile",
     redirect_uri: typeof window !== "undefined" ? window.location.href : "/",
@@ -91,11 +98,9 @@ class FacebookSSO extends React.PureComponent<any, any> {
   }
 
   initFbSDK(config: objectType, document: HTMLDocument) {
-    const _window = window as any;
-    const _this = this;
-    _window.fbAsyncInit = function () {
-      _window.FB.init({ ...config });
-      _this.setState({
+    this._window.fbAsyncInit = function () {
+      this._window.FB.init({ ...config });
+      this.setState({
         isSdkLoaded: true
       });
       let fbRoot = document.getElementById("fb-root");
@@ -108,7 +113,7 @@ class FacebookSSO extends React.PureComponent<any, any> {
   }
 
   getMe(authResponse: objectType) {
-    (window as any).FB.api(
+    this._window.FB.api(
       "/me",
       { locale: this.props.language, fields: this.props.fieldsProfile },
       (me: any) => {
@@ -142,16 +147,15 @@ class FacebookSSO extends React.PureComponent<any, any> {
     this.setState({
       isProgressing: true
     });
-    const _window = window as any;
     // only case mobile (redirect to fb)
     // window.location.href = `https://www.facebook.com/dialog/oauth${getParamsFromObject(params)}`;
-    if (!_window.FB) {
+    if (!this._window.FB) {
       this.setState({
         isProgressing: false
       });
       this.props.onReject("Fb isn't loaded!");
     } else {
-      _window.FB.login(this.handleResponse, {
+      this._window.FB.login(this.handleResponse, {
         scope: this.props.scope,
         return_scopes: this.props.return_scopes,
         auth_type: this.props.auth_type

@@ -1,8 +1,15 @@
 # google-facebook-signin-react
-
-> Google &amp; Facebook SignIn Button React.js
-
 [![npm version](https://badge.fury.io/js/google-facebook-signin-react.svg)](https://badge.fury.io/js/google-facebook-signin-react) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+
+#
+
+> Social Single SignOn React.JS: (Google &amp; Facebook) (Needed additional other social platform)
+
+#
+
+![Image](https://d3l69s690g8302.cloudfront.net/wp-content/uploads/2016/09/26191011/SCJZO.png)
+
+#
 
 ## Install
 
@@ -10,20 +17,24 @@
 npm install --save google-facebook-signin-react
 ```
 
+
+#### [Link Web: https://socialsso.netlify.com](https://socialsso.netlify.com)
+
 #### [Link Demo](https://codesandbox.io/s/google-facebook-signin-sso-reactjs-fum4f)
-
-
 
 #### [NPM](https://www.npmjs.com/package/google-facebook-signin-react)
 #### [Github](https://github.com/CuongStf/google-facebook-signin-react)
 
+
+## Contribute
+Create pull request. Thanks ( needed additional github, instagram, twitter)
 
 ## Usage
 
 ```tsx
 import React, { Component } from "react";
 
-import { FacebookSignIn, GoogleSignIn } from "google-facebook-signin-react";
+import { FacebookSignIn, GoogleSignIn } from "sso-login-react";
 
 export default class App extends Component {
   success(res) {
@@ -60,24 +71,11 @@ export default class App extends Component {
     );
   }
 }
-
-
 ```
-
-  hosted_domain: string,
-  openid_realm: string,
-  ux_mode: string,
-  redirect_uri: string,
-  prompt: string,
-  response_type: string
-  login_hint: string,
-  discoveryDocs: string,
-  access_type: string,
-  isDisabled: boolean
-}
 
 ## Prop
 ### Google Button
+[More detail: Google Developer](https://developers.google.com)
 | Prop                  | Type                                | Default | Description |
 | :---------            | :-------:                           | :-----: | :----------- |
 | onResolve             | `promise function (required)`                     | `-`       | Response when logged |
@@ -98,9 +96,9 @@ export default class App extends Component {
 | access_type             | `string (optional)`                     | `online`       | "online , "offline|
 | isDisabled             | `boolean (optional)`                     | `true`       | |
 
-`--------------------------------------------------------------------------------------------------------------------------`
 
 ### Facebook Button
+[More detail: Facebook Developer](https://developers.facebook.com)
 | Prop                  | Type                                | Default | Description |
 | :---------            | :-------:                           | :-----: | :----------- |
 | onResolve             | `promise function (required)`                     | `-`       | Response when logged |

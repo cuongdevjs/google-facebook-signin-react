@@ -1,7 +1,3 @@
-/**
- * @class ExampleComponent
- */
-
 import * as React from 'react'
 
 import './styles.css'
@@ -11,41 +7,41 @@ import GoogleSSO from "./googleSSO";
 export type PropGoogle = {
   onResolve: Function
   onReject: Function
-  className: string
+  className?: string
   client_id: string,
-  cookie_policy: string,
-  scope: string,
-  fetch_basic_profile: boolean,
-  hosted_domain: string,
-  openid_realm: string,
-  ux_mode: string,
-  redirect_uri: string,
-  prompt: string,
-  response_type: string
-  login_hint: string,
-  discoveryDocs: string,
-  access_type: string,
-  isDisabled: boolean
+  cookie_policy?: string,
+  scope?: string,
+  fetch_basic_profile?: boolean,
+  hosted_domain?: string,
+  openid_realm?: string,
+  ux_mode?: string,
+  redirect_uri?: string,
+  prompt?: string,
+  response_type?: string
+  login_hint?: string,
+  discoveryDocs?: string,
+  access_type?: string,
+  isDisabled?: boolean
 }
 export type PropFacebook = {
   onResolve: Function
   onReject: Function
-  className: string
-  scope: string,
-  redirect_uri: string,
-  state: string,
-  response_type: string,
-  auth_type: string,
-  return_scopes: boolean,
-  enable_profile_selector: boolean,
-  profile_selector_id: boolean,
-  language: string,
+  className?: string
+  scope?: string,
+  redirect_uri?: string,
+  state?: string,
+  response_type?: string,
+  auth_type?: string,
+  return_scopes?: boolean,
+  enable_profile_selector?: boolean,
+  profile_selector_id?: boolean,
+  language?: string,
   appId: string,
-  isDisabled: boolean,
-  fieldsProfile: string,
-  xfbml: boolean,
-  version: string,
-  cookie: boolean,
+  isDisabled?: boolean,
+  fieldsProfile?: string,
+  xfbml?: boolean,
+  version?: string,
+  cookie?: boolean,
 }
 
 export class GoogleSignIn extends React.Component<PropGoogle> {
@@ -65,7 +61,8 @@ export class GoogleSignIn extends React.Component<PropGoogle> {
 
   render() {
     const result =
-      <GoogleSSO onResolve={this.props.onResolve}
+      <GoogleSSO
+        onResolve={this.props.onResolve}
         onReject={this.props.onReject}
         className={this.props.className}
         client_id={this.props.client_id}
@@ -112,7 +109,8 @@ export class FacebookSignIn extends React.Component<PropFacebook> {
 
   render() {
     const result =
-      <FacebookSSO onResolve={this.props.onResolve}
+      <FacebookSSO
+        onResolve={this.props.onResolve}
         onReject={this.props.onReject}
         className={this.props.className}
         scope={this.props.scope}
