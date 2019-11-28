@@ -19,7 +19,8 @@ interface IProps {
   xfbml?: boolean,
   version?: string,
   cookie?: boolean,
-  className?: string
+  className?: string,
+  chidren?: any
 }
 
 interface IStates {
@@ -60,7 +61,8 @@ class FacebookSSO extends React.PureComponent<IProps, IStates> {
     version: "v5.0",
     cookie: true,
     isDisabled: false,
-    className: ""
+    className: "",
+    children: "Login Facebook"
   };
 
   componentDidMount(): void {
@@ -70,20 +72,21 @@ class FacebookSSO extends React.PureComponent<IProps, IStates> {
       });
       return;
     } else {
-      this.insertSDKScript(document);
-      this.initFbSDK(
-        {
-          appId: this.props.appId,
-          xfbml: this.props.xfbml,
-          version: this.props.version,
-          cookie: this.props.cookie
-        },
-        document
-      );
+      this.insertSDKScript(document, () => {
+        this.initFbSDK(
+          {
+            appId: this.props.appId,
+            xfbml: this.props.xfbml,
+            version: this.props.version,
+            cookie: this.props.cookie
+          },
+          document
+        );
+      });
     }
   }
 
-  insertSDKScript(document: HTMLDocument) {
+  insertSDKScript(document: HTMLDocument, cb: () => void) {
     const fbScriptTag = document.createElement("script");
     fbScriptTag.id = this.SCRIPT_ID;
     fbScriptTag.src = this.SDK_URL;
@@ -91,6 +94,7 @@ class FacebookSSO extends React.PureComponent<IProps, IStates> {
     scriptNode &&
       scriptNode.parentNode &&
       scriptNode.parentNode.insertBefore(fbScriptTag, scriptNode);
+    cb();
   }
 
   checkIsExistsSDKScript() {
@@ -99,7 +103,7 @@ class FacebookSSO extends React.PureComponent<IProps, IStates> {
 
   initFbSDK(config: objectType, document: HTMLDocument) {
     this._window.fbAsyncInit = function () {
-      this._window.FB.init({ ...config });
+      this._window.FB && this._window.FB.init({ ...config });
       this.setState({
         isSdkLoaded: true
       });
@@ -152,6 +156,17 @@ class FacebookSSO extends React.PureComponent<IProps, IStates> {
     if (!this._window.FB) {
       this.setState({
         isProgressing: false
+      });
+      this.insertSDKScript(document, () => {
+        this.initFbSDK(
+          {
+            appId: this.props.appId,
+            xfbml: this.props.xfbml,
+            version: this.props.version,
+            cookie: this.props.cookie
+          },
+          document
+        );
       });
       this.props.onReject("Fb isn't loaded!");
     } else {

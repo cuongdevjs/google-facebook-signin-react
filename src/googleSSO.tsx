@@ -19,6 +19,7 @@ interface IProps {
   access_type?: string,
   isDisabled?: boolean,
   className?: string,
+  children?: any
 }
 
 interface IStates {
@@ -44,7 +45,7 @@ class GoogleSSO extends React.PureComponent<IProps, IStates> {
   private _window = window as any;
 
   static defaultProps = {
-    client_id: "142305466831-gol9khuhp2ufjh15cktevde0m8hd6vlp.apps.googleusercontent.com",
+    // client_id: "142305466831-gol9khuhp2ufjh15cktevde0m8hd6vlp.apps.googleusercontent.com",
     cookie_policy: "single_host_origin",
     scope: "email profile",
     fetch_basic_profile: true,
@@ -54,7 +55,12 @@ class GoogleSSO extends React.PureComponent<IProps, IStates> {
     login_hint: "",
     discoveryDocs: "https://www.googleapis.com/discovery/v1/apis/drive/v3/rest",
     access_type: "online",
-    isDisabled: false
+    isDisabled: false,
+    redirect_uri: "/",
+    hosted_domain: "",
+    openid_realm: "",
+    className: "",
+    children: "Login Google"
   };
 
   componentDidMount(): void {

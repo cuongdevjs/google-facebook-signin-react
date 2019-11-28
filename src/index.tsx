@@ -7,8 +7,8 @@ import GoogleSSO from "./googleSSO";
 export type PropGoogle = {
   onResolve: Function
   onReject: Function
-  className?: string
   client_id: string,
+  className?: string
   cookie_policy?: string,
   scope?: string,
   fetch_basic_profile?: boolean,
@@ -21,11 +21,13 @@ export type PropGoogle = {
   login_hint?: string,
   discoveryDocs?: string,
   access_type?: string,
-  isDisabled?: boolean
+  isDisabled?: boolean,
+  children?: any
 }
 export type PropFacebook = {
   onResolve: Function
   onReject: Function
+  appId: string,
   className?: string
   scope?: string,
   redirect_uri?: string,
@@ -36,17 +38,17 @@ export type PropFacebook = {
   enable_profile_selector?: boolean,
   profile_selector_id?: boolean,
   language?: string,
-  appId: string,
   isDisabled?: boolean,
   fieldsProfile?: string,
   xfbml?: boolean,
   version?: string,
   cookie?: boolean,
+  children?: any
 }
 
 export class GoogleSignIn extends React.Component<PropGoogle> {
   static defaultProps = {
-    client_id: "142305466831-gol9khuhp2ufjh15cktevde0m8hd6vlp.apps.googleusercontent.com",
+    client_id: "",
     cookie_policy: "single_host_origin",
     scope: "email profile",
     fetch_basic_profile: true,
@@ -57,15 +59,17 @@ export class GoogleSignIn extends React.Component<PropGoogle> {
     discoveryDocs: "https://www.googleapis.com/discovery/v1/apis/drive/v3/rest",
     access_type: "online",
     isDisabled: false,
+    children: "Login Facebook",
+    className: ""
   }
 
   render() {
-    const result =
+    return (
       <GoogleSSO
         onResolve={this.props.onResolve}
         onReject={this.props.onReject}
-        className={this.props.className}
         client_id={this.props.client_id}
+        className={this.props.className}
         cookie_policy={this.props.cookie_policy}
         scope={this.props.scope}
         fetch_basic_profile={this.props.fetch_basic_profile}
@@ -80,9 +84,9 @@ export class GoogleSignIn extends React.Component<PropGoogle> {
         access_type={this.props.access_type}
         isDisabled={this.props.isDisabled}
       >
-        {this.props.children ? this.props.children : "Login Google"}
+        {this.props.children}
       </GoogleSSO>
-    return result;
+    )
   }
 }
 
@@ -99,12 +103,13 @@ export class FacebookSignIn extends React.Component<PropFacebook> {
     profile_selector_id: true,
     language: "vi_VN",
     fieldsProfile: "name, email, birthday",
-    appId: "2086263614924092",
+    appId: "",
     xfbml: true,
     version: "v5.0",
     cookie: true,
     isDisabled: false,
-    className: ""
+    className: "",
+    children: "Login Facebook"
   }
 
   render() {
@@ -128,7 +133,7 @@ export class FacebookSignIn extends React.Component<PropFacebook> {
         xfbml={this.props.xfbml}
         version={this.props.version}
         cookie={this.props.cookie}
-      >{this.props.children ? this.props.children : "Login Facebook"}
+      >{this.props.children}
       </FacebookSSO>
     return result;
   }
