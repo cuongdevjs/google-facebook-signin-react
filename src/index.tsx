@@ -48,7 +48,7 @@ export type PropFacebook = {
 
 export class GoogleSignIn extends React.Component<PropGoogle> {
   static defaultProps = {
-    client_id: "",
+    // client_id: "142305466831-gol9khuhp2ufjh15cktevde0m8hd6vlp.apps.googleusercontent.com",
     cookie_policy: "single_host_origin",
     scope: "email profile",
     fetch_basic_profile: true,
@@ -59,8 +59,11 @@ export class GoogleSignIn extends React.Component<PropGoogle> {
     discoveryDocs: "https://www.googleapis.com/discovery/v1/apis/drive/v3/rest",
     access_type: "online",
     isDisabled: false,
-    children: "Login Facebook",
-    className: ""
+    redirect_uri: "/",
+    hosted_domain: "",
+    openid_realm: "",
+    className: "",
+    children: "Login Google"
   }
 
   render() {
@@ -103,7 +106,7 @@ export class FacebookSignIn extends React.Component<PropFacebook> {
     profile_selector_id: true,
     language: "vi_VN",
     fieldsProfile: "name, email, birthday",
-    appId: "",
+    // appId: "2086263614924092",
     xfbml: true,
     version: "v5.0",
     cookie: true,

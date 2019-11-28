@@ -46,6 +46,7 @@ class FacebookSSO extends React.PureComponent<IProps, IStates> {
   private _window = window as any;
 
   static defaultProps = {
+    // appId: "2086263614924092",
     scope: "email, public_profile",
     redirect_uri: typeof window !== "undefined" ? window.location.href : "/",
     state: "facebookdirect",
@@ -56,7 +57,6 @@ class FacebookSSO extends React.PureComponent<IProps, IStates> {
     profile_selector_id: true,
     language: "vi_VN",
     fieldsProfile: "name, email, birthday",
-    appId: "2086263614924092",
     xfbml: true,
     version: "v5.0",
     cookie: true,
@@ -102,9 +102,11 @@ class FacebookSSO extends React.PureComponent<IProps, IStates> {
   }
 
   initFbSDK(config: objectType, document: HTMLDocument) {
-    this._window.fbAsyncInit = function () {
-      this._window.FB && this._window.FB.init({ ...config });
-      this.setState({
+    const _this = this;
+    const _window = window as any;
+    _window.fbAsyncInit = function () {
+      _window.FB && _window.FB.init({ ...config });
+      _this.setState({
         isSdkLoaded: true
       });
       let fbRoot = document.getElementById("fb-root");
