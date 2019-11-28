@@ -73,9 +73,13 @@ export default class App extends Component {
 }
 ```
 
-## Prop
-### Google Button
-[More detail: Google Developer](https://developers.google.com)
+## Props
+
+#
+> ### Google Button
+> [More detail: Google Developer](https://developers.google.com)
+>
+#
 | Prop                  | Type                                | Default | Description |
 | :---------            | :-------:                           | :-----: | :----------- |
 | onResolve             | `promise function (required)`                     | `-`       | Response when logged |
@@ -96,9 +100,10 @@ export default class App extends Component {
 | access_type             | `string (optional)`                     | `online`       | "online , "offline|
 | isDisabled             | `boolean (optional)`                     | `true`       | |
 
-
-### Facebook Button
-[More detail: Facebook Developer](https://developers.facebook.com)
+#
+> ### Facebook Button
+> [More detail: Facebook Developer](https://developers.facebook.com)
+#
 | Prop                  | Type                                | Default | Description |
 | :---------            | :-------:                           | :-----: | :----------- |
 | onResolve             | `promise function (required)`                     | `-`       | Response when logged |
